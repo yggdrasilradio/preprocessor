@@ -4,21 +4,19 @@
 
 	' Set up video mode
 	rgb
-	width 40
+	width 80
 
 	' Cycle through background colors
-10	b = 0
-	for b = 0 to 7
+10	for b = 0 to 7
 
 		' Set background color
 		cls b
 
-		' Set foreground colorrs
+		' Set foreground colors
 		for i = 0 to 7
 			attr i, b
-			locate 1, i * 2
-			print "Color ";
-			print b
+			locate 5, i * 2
+			print "Color "; i; b;
 		next i
 
 		' Wait for any key
