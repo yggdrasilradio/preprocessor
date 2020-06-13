@@ -4,20 +4,29 @@
 
 	' Set up video mode
 	rgb
-	cls 0
+	width 40
 
-	' Draw some text
-	print @32 + 16 - 2, "test";
+	' Cycle through background colors
+10	b = 0
+	for b = 0 to 7
 
-	' Draw some random-colored pixels
-10	for i = 0 to 31
-		if rnd(0) > .5 then
-			set(i, i, 5)
-		else
-			set(i, i, 7)
-		end if
-	next i
+		' Set background color
+		cls b
 
+		' Set foreground colorrs
+		for i = 0 to 7
+			attr i, b
+			locate 1, i * 2
+			print "Color ";
+			print b
+		next i
+
+		' Wait for any key
+20		if inkey$ = "" then goto 20 end if
+
+	next b
+
+	' Loop until BREAK is hit
 	goto 10
 
 	' Reset the machine

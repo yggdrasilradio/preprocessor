@@ -13,15 +13,9 @@ def minify(text):
 	return '"'.join(arr)
 
 def optimize(text):
-	value = text.replace(":ELSE:", "ELSE")
-	value = value.replace("ELSE:", "ELSE")
-	value = value.replace(":ELSE", "ELSE")
-	value = value.replace(":THEN:", "THEN")
-	value = value.replace("THEN:", "THEN")
-	value = value.replace(":THEN", "THEN")
-	if value[0] == ":":
-		value = value[1:]
-	return value
+	value = re.sub(r":?ELSE:?", "ELSE", text)
+	value = re.sub(r":?THEN:?", "THEN", value)
+	return value if value[0] != ":" else value[1:]
 
 lines = ""
 linenum = 0
@@ -30,20 +24,26 @@ for line in fileinput.input():
 	line = minify(line)
 	if line.endswith("ENDIF"):
 		line = line[:-5]
-		print optimize(lines + line)
+		if len(lines) > 0:
+			if line[0].isdigit():
+				linenum = int(re.findall(r'^\D*(\d+)', line)[0])
+				print optimize(lines)
+				print optimize(line)
+			else:
+				print optimize(lines + ":" + line)
 		lines = ""
 	elif len(line) > 0:
 		if line[0].isdigit():
 			linenum = int(re.findall(r'^\D*(\d+)', line)[0])
 			if len(lines) > 0:
-				print lines
+				print optimize(lines)
 			lines = line
 		else:
 			if len(lines) == 0:
 				linenum = linenum + 1
 				lines = str(linenum) + line
 			else:
-				lines = optimize(lines + ":" + line)
+				lines = lines + ":" + line
 
 if len(lines) > 0:
-	print lines
+	print optimize(lines)
