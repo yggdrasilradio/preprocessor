@@ -20,7 +20,9 @@
 		next i
 
 		' Wait for any key
-20		if inkey$ = "" then goto 20 end if
+20		if inkey$ = "" then
+			goto 20
+		end if
 
 	next b
 
