@@ -16,4 +16,4 @@ The code that actually gets sent over is:
 ![](images/code.png)
 
 Note that there is syntax highlighting for BASIC code on the CocoPI right out of the box.
-But it's for QBASIC, not DECB, so that needs some work.  I'm working on fixing that.
+But it's for QBASIC, not DECB.  To fix that, copy the basic.vim file to _~/.vim/basic.vim_.
