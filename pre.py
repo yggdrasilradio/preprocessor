@@ -8,8 +8,10 @@ def minify(text):
 	for i, item in enumerate(arr):
 		if not i % 2:
 			arr[i] = re.sub("\s+", "", item).upper()
-			if "'" in arr[i] or  "'" in arr[i]:
-				del arr[i:]
+			if "'" in arr[i] or "REM" in arr[i]:
+				j = i + 1
+				del arr[j:]
+				arr[i] = arr[i].split("'")[0]
 	return '"'.join(arr)
 
 def optimize(text):

@@ -48,7 +48,7 @@ syn keyword basicStatement exec Exec EXEC
 syn keyword basicStatement exp Exp EXP
 syn keyword basicStatement field Field FIELD
 syn keyword basicStatement files Files FILES
-"syn keyword basicStatement xfor xFor xFOR
+syn keyword basicStatement for For FOR
 syn keyword basicStatement get Get GET
 syn keyword basicStatement go Go GO
 syn keyword basicStatement gosub Gosub GOSUB
@@ -184,7 +184,10 @@ syn match   basicSpecial contained "\\\d\d\d\|\\."
 syn region  basicString		  start=+"+  skip=+\\\\\|\\"+  end=+"+  contains=basicSpecial
 
 syn region  basicComment	start="REM" end="$" contains=basicTodo
+syn region  basicComment	start="rem" end="$" contains=basicTodo
+syn region  basicComment	start="Rem" end="$" contains=basicTodo
 syn region  basicComment	start="^[ \t]*'" end="$" contains=basicTodo
+syn region  basicComment	start="'" end="$" contains=basicTodo
 syn region  basicLineNumber	start="^\d" end="\s"
 syn match   basicTypeSpecifier  "[a-zA-Z0-9][\$%&!#]"ms=s+1
 " Used with OPEN statement
