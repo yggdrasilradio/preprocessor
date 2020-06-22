@@ -6,29 +6,31 @@
 	rgb
 	width 80
 
-	' Cycle through background colors
-10	for b = 0 to 7
+	' Set up palette colors
+	palette 0, 0
+	for i = 8 to 15
+		read c
+		palette i, c
+	next i
 
-		' Set background color
-		cls b
+	' Clear screen
+	cls 1
 
-		' Set foreground colors
-		for i = 0 to 7
-			attr i, b
-			locate 5, i * 2
-			print "Color "; i; b;
-		next i
-
-		' Wait for any key
-20		if inkey$ = "" then
-			goto 20
-		end if
-
-	next b
+	' Display text in different colors
+	for i = 0 to 7
+		attr i, 0
+		for j = 0 to 255
+			print chr$(j);
+		next j
+	next i
 
 	' Loop until BREAK is hit
-	goto 10
+10	goto 10
 
 	' Reset the machine
 1000	poke &H71, 0
 	exec &H8c1b
+
+	' Palette color values:
+	' yellow, red, green, blue, orange, cyan, magenta, white
+	data 55,37,16,11,38,25,47,63
