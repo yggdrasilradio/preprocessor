@@ -18,8 +18,9 @@
 
 	' Display text in different colors
 	for i = 0 to 7
+		print
 		attr i, 0
-		for j = 0 to 255
+		for j = 32 to 255
 			print chr$(j);
 		next j
 	next i
@@ -33,4 +34,4 @@
 
 	' Palette color values:
 	' yellow, red, green, blue, orange, cyan, magenta, white
-	data 55,37,16,11,38,25,47,63
+	data 54,36,18,11,38,25,45,63
