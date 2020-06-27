@@ -75,6 +75,7 @@ syn keyword basicStatement line Line LINE
 syn keyword basicStatement list List LIST
 syn keyword basicStatement llist Llist LLIST
 syn keyword basicStatement load Load LOAD
+syn keyword basicStatement loadm Loadm LOADM
 syn keyword basicStatement locate Locate LOCATE
 syn keyword basicStatement lpoke Lpoke LPOKE
 syn keyword basicStatement lset Lset LSET
