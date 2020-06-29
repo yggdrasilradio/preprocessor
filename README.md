@@ -1,4 +1,4 @@
-DECB Preprocessor
+DECBPP: DECB Preprocessor
 ==========
 
 I'm using my CocoPI in command line mode to edit BASIC programs, drivewire to
@@ -17,3 +17,5 @@ The code that actually gets sent over is:
 
 Note that there is syntax highlighting for BASIC code on the CocoPI right out of the box.
 But it's for QBASIC, not DECB.  To fix that, copy the basic.vim file to _~/.vim/basic.vim_.
+
+Copy decbpp to _/usr/local/bin_.
