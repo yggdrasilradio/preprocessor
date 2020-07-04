@@ -120,6 +120,7 @@ syn keyword basicStatement to To TO
 syn keyword basicStatement troff Troff TROFF
 syn keyword basicStatement tron Tron TRON
 syn keyword basicStatement unload Unload UNLOAD
+syn keyword basicStatement using Using USING
 syn keyword basicStatement verify Verify VERIFY
 syn keyword basicStatement width Width WIDTH
 syn keyword basicStatement write Write WRITE
