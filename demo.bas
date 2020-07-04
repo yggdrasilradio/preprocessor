@@ -1,6 +1,17 @@
 
-	' Set up video mode and palette colors
+	' Reset machine on BREAK
 	pclear 1
+	on brk goto 1000
+
+	' Disable cursor
+	poke &HF905, &H21
+	poke &HF91C, &H21
+	poke &HF812, &H21
+	poke &HF850, &H21
+	poke &HF89D, &H21
+	poke &HF7EC, 0
+
+	' Set up video mode and palette colors
 	rgb
 	width 80
 	palette 0, 0
@@ -12,9 +23,6 @@
 	' Palette color values:
 	' yellow, red, green, blue, orange, cyan, magenta, white
 	data 54,36,18,11,38,25,45,63
-
-	' Reset machine on BREAK
-	on brk goto 1000
 
 	' Set up text items
 	dim a$(8)
@@ -35,17 +43,15 @@
 	next i
 
 	' Display joystick values until BREAK is hit
-	locate 0,19
+	locate 0, 19
 	print "Joystick X  Joystick Y";
 	attr 2, 0
 10	x = joystk(0)
 	y = joystk(1)
-	locate 3, 20
-	print x;
-	locate 15, 20
-	print y;
+	locate 4, 20
+	print using "##          ##"; x; y;
 	goto 10
 
 	' Reset the machine
 1000	poke &H71, 0
-	exec &H8c1b
+	exec &H8C1B
