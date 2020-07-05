@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import fileinput
+import sys
+#import fileinput
 import re
 
 def minify(text):
@@ -23,10 +24,24 @@ def optimize(text):
 		value = value[:-1]
 	return value
 
+# read BASIC file
+linelist = sys.stdin.read().split('\n')
+
+# process INCLUDEs
+i = 0
+for line in linelist:
+	i = i + 1
+	line = minify(line.strip())
+	if line.startswith("INCLUDE"):
+		filename = line[7:].strip().replace('"', '')
+		inslist = open(filename, "r").readlines()
+		linelist[i-1:i] = inslist
+
+# process BASIC lines
 lines = ""
 linenum = 0
 data = ""
-for line in fileinput.input():
+for line in linelist:
 
 	line = minify(line)
 	if line.startswith("DATA"):
@@ -43,15 +58,19 @@ for line in fileinput.input():
 		lines = ""
 	elif len(line) > 0:
 		if line[0].isdigit():
+			# line with line number
 			linenum = int(re.findall(r'^\D*(\d+)', line)[0])
 			if len(lines) > 0:
 				print optimize(lines)
 			lines = line
 		else:
+			# line without line number
 			if len(lines) == 0:
+				# generate line number
 				linenum = linenum + 1
 				lines = str(linenum) + line
 			else:
+				# concatenate line
 				lines = lines + ":" + line
 
 if len(lines) > 0:
