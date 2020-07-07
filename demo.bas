@@ -4,12 +4,7 @@
 	on brk goto 1000
 
 	' Disable cursor
-	poke &HF905, &H21
-	poke &HF91C, &H21
-	poke &HF812, &H21
-	poke &HF850, &H21
-	poke &HF89D, &H21
-	poke &HF7EC, 0
+	include "disable.bas"
 
 	' Set up video mode and palette colors
 	rgb
@@ -35,10 +30,16 @@
 	data "Orange", "Cyan", "Magenta", "White"
 
 	' Display text in different colors
+	randomize
 	cls 1
 	for i = 0 to 7
 		locate 0, i * 2
 		attr i, 0
+		if rnd(0) > .5 then
+			print "Color ";
+		else
+			print "Colour ";
+		end if
 		print a$(i);
 	next i
 
