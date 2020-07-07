@@ -101,7 +101,6 @@ syn keyword basicStatement preset Preset PRESET
 syn keyword basicStatement print Print PRINT
 syn keyword basicStatement pset Pset PSET
 syn keyword basicStatement put Put PUT
-syn keyword basicStatement randomize Randomize RANDOMIZE
 syn keyword basicStatement read Read READ
 syn keyword basicStatement rename Rename RENAME
 syn keyword basicStatement renum Renum RENUM

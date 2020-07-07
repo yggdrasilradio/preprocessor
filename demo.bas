@@ -30,7 +30,6 @@
 	data "Orange", "Cyan", "Magenta", "White"
 
 	' Display text in different colors
-	randomize
 	cls 1
 	for i = 0 to 7
 		locate 0, i * 2
