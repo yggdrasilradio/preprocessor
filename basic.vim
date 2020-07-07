@@ -42,6 +42,7 @@ syn keyword basicStatement dski$ Dski$ DSKI$
 syn keyword basicStatement dskini Dskini DSKINI
 syn keyword basicStatement dsko$ Dsko$ DSKO$
 syn keyword basicStatement edit Edit EDIT
+syn keyword basicStatement else Else ELSE
 syn keyword basicStatement end End END
 syn keyword basicStatement err Err ERR
 syn keyword basicStatement exec Exec EXEC
@@ -100,6 +101,7 @@ syn keyword basicStatement preset Preset PRESET
 syn keyword basicStatement print Print PRINT
 syn keyword basicStatement pset Pset PSET
 syn keyword basicStatement put Put PUT
+syn keyword basicStatement randomize Randomize RANDOMIZE
 syn keyword basicStatement read Read READ
 syn keyword basicStatement rename Rename RENAME
 syn keyword basicStatement renum Renum RENUM
