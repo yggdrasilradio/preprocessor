@@ -13,7 +13,8 @@ def minify(text):
 				j = i + 1
 				del arr[j:]
 				arr[i] = arr[i].split("'")[0]
-	return '"'.join(arr)
+	r = '"'.join(arr).replace("THEN", " THEN")
+	return r
 
 def optimize(text):
 	value = re.sub(r":?ELSE:?", "ELSE", text)
