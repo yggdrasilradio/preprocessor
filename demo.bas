@@ -9,10 +9,10 @@
 	' Set up video mode and palette colors
 	rgb
 	width 80
-	palette 0, 0
+	palette 0, 0		' background color
 	for i = 8 to 15
 		read c
-		palette i, c
+		palette i, c	' 8 foreground colors
 	next i
 
 	' Palette color values:
