@@ -68,6 +68,7 @@ syn keyword basicStatement hscreen Hscreen HSCREEN
 syn keyword basicStatement hset Hset HSET
 syn keyword basicStatement hstat Hstat HSTAT
 syn keyword basicStatement if If IF
+syn keyword basicStatement include Include INCLUDE
 syn keyword basicStatement input Input INPUT
 syn keyword basicStatement kill Kill KILL
 syn keyword basicStatement let Let LET
