@@ -1,10 +1,9 @@
 #!/usr/bin/python
 
 import sys
-#import fileinput
 import re
 
-keywords = ['ATTR', 'DIM', 'PRINT', 'IF', 'NEXT', 'INPUT']
+keywords = ['ON', 'ONBRK', 'ONERR', 'ATTR', 'DIM', 'FOR', 'PRINT', 'IF', 'NEXT', 'INPUT']
 
 def minify(text):
 	arr = text.strip().split('"')
