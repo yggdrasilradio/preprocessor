@@ -68,7 +68,7 @@ for line in linelist:
 	line = minify(line)
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
-	elif line.endswith("END IF"):
+	elif line.endswith("ENDIF"):
 		line = line[:-6]
 		if len(lines) > 0:
 			if len(line) > 0 and line[0].isdigit():
