@@ -17,7 +17,7 @@
 
 	' Palette color values:
 	' yellow, red, green, blue, orange, cyan, magenta, white
-	data 54,36,18,11,38,25,45,63
+	data 54, 36, 18, 11, 38, 25, 45, 63
 
 	' Set up text items
 	dim a$(8)
