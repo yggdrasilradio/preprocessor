@@ -99,4 +99,4 @@ if len(lines) > 0:
 	print optimize(lines)
 if len(data) > 0:
 	linenum = linenum + 1
-	print str(++linenum) + 'DATA' + data[1:]
+	print str(linenum) + 'DATA' + data[1:]
