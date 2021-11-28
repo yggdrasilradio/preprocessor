@@ -70,14 +70,19 @@ inwhile = False
 for line in linelist:
 
 	line = minify(line)
-	if "WHILE" in line: # this is too naive!
+	# WHILE
+	if re.match("^.*\d*.*WHILE.+$", line):
 		inwhile = True
-		linenum = linenum + 1
-		line = str(linenum) + line.replace("WHILE", "IF")
-		linenum = linenum - 1
+		line = line.replace("WHILE", "IF", 1)
+		line = str(linenum + 1) + line
 		line = minify(line);
+	# END WHILE
+	if inwhile:
+		line = re.sub(r'WHILE$', r'IF', line)
+	# DATA
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
+	# END IF and END WHILE
 	elif line.endswith("ENDIF"):
 		line = line[:-6]
 		if inwhile:
