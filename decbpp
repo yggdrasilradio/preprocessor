@@ -19,31 +19,33 @@ def minify(text):
 	arr = text.strip().split('"')
 	for i, item in enumerate(arr):
 		if not i % 2:
-			s = item.upper().strip()
-			s = re.sub(r'([^A-Z])\s+', r'\1', s)
-			s = re.sub(r'\s+([^A-Z])', r'\1', s)
+			# not inside quotes
+			s = item.upper().strip()		# upper case
+			s = re.sub(r'([^A-Z])\s+', r'\1', s)	# eliminate whitespace after constants, variables and operators
+			s = re.sub(r'\s+([^A-Z])', r'\1', s)	# eliminate whitespace before constants, variables and operators
 			arr[i] = s
 			if "'" in arr[i] or "REM" in arr[i]:
+				# remove comments
 				j = i + 1
 				del arr[j:]
 				arr[i] = arr[i].split("'")[0]
 	r = '"'.join(arr)
-	m = re.search(r'[A-Z]', r, re.I)
+	m = re.search(r'[A-Z]', r, re.I)			# find keyword
 	if m is not None:
 		c = r[m.start()]
 		for keyword in keywords:
 			if keyword[0] == c:
-				r = re.sub(r'(^\d*' + keyword + ') ', r'\1', r)
+				r = re.sub(r'(^\d*' + keyword + ') ', r'\1', r) # eliminate whitespace after keywords
 	return r
 
 def optimize(text):
 
-	value = re.sub(r':?ELSE:?', r'ELSE', text)
-	value = re.sub(r':?THEN:?', r'THEN', value)
+	value = re.sub(r':?ELSE:?', r'ELSE', text)		# strip trailing colon after ELSE
+	value = re.sub(r':?THEN:?', r'THEN', value)		# strip trailing colon after THEN
 	if len(value) > 0 and value[0] == ":":
-		value = value[1:]
+		value = value[1:]				# strip leading colon
 	if len(value) > 0 and value[-1] == ":":
-		value = value[:-1]
+		value = value[:-1]				# strip trailing colon
 	return value
 
 # read BASIC file
@@ -53,23 +55,33 @@ linelist = sys.stdin.read().split('\n')
 i = 0
 for line in linelist:
 	i = i + 1
-	line = minify(line.strip())
 	if line.startswith("INCLUDE"):
 		filename = line[7:].strip().replace('"', '')
 		inslist = open(filename, "r").readlines()
 		linelist[i-1:i] = inslist
+	line = minify(line.strip())
 
 # process BASIC lines
 lines = ""
 linenum = 0
 data = ""
+inwhile = False
 for line in linelist:
 
 	line = minify(line)
+	if "WHILE" in line:
+		inwhile = True
+		linenum = linenum + 1
+		line = str(linenum) + line.replace("WHILE", "IF")
+		linenum = linenum - 1
+		line = minify(line)
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
 	elif line.endswith("ENDIF"):
 		line = line[:-6]
+		if inwhile:
+			lines = lines + ":GOTO" + str(linenum)
+			inwhile = False
 		if len(lines) > 0:
 			if len(line) > 0 and line[0].isdigit():
 				linenum = int(re.findall(r'^\D*(\d+)', line)[0])
