@@ -124,6 +124,7 @@ syn keyword basicStatement tron Tron TRON
 syn keyword basicStatement unload Unload UNLOAD
 syn keyword basicStatement using Using USING
 syn keyword basicStatement verify Verify VERIFY
+syn keyword basicStatement while While WHILE
 syn keyword basicStatement width Width WIDTH
 syn keyword basicStatement write Write WRITE
 
