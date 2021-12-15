@@ -67,28 +67,40 @@ for line in linelist:
 lines = ""
 linenum = 0
 data = ""
-inwhile = False
+inwhile = 0
 for line in linelist:
 
 	line = minify(line)
+
 	# WHILE
 	if re.match("^.*\d*.*WHILE.+$", line):
-		inwhile = True
+		inwhile = linenum + 1
 		line = line.replace("WHILE", "IF", 1)
 		line = str(linenum + 1) + line
 		line = minify(line);
 	# END WHILE
-	if inwhile:
-		line = re.sub(r'WHILE$', r'IF', line)
+	#if inwhile > 0:
+		#line = re.sub(r'WHILE$', r'IF', line)
 	# DATA
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
 	# END IF and END WHILE
-	elif line.endswith("ENDIF"):
+	elif line.endswith("ENDIF"): 
 		line = line[:-6]
-		if inwhile:
-			lines = lines + ":GOTO" + str(linenum)
-			inwhile = False
+		if len(lines) > 0:
+			if len(line) > 0 and line[0].isdigit():
+				# line with line number
+				linenum = int(re.findall(r'^\D*(\d+)', line)[0])
+				print optimize(lines)
+				print optimize(line)
+			else:
+				# line without line number
+				print optimize(lines + ":" + line)
+		lines = ""
+	elif line.endswith("ENDWHILE"): 
+		line = line[:-9]
+		lines = lines + ":GOTO" + str(inwhile)
+		inwhile = 0
 		if len(lines) > 0:
 			if len(line) > 0 and line[0].isdigit():
 				# line with line number
@@ -116,6 +128,7 @@ for line in linelist:
 				# concatenate line
 				lines = lines + ":" + line
 
+# finish up
 if len(lines) > 0:
 	print optimize(lines)
 if len(data) > 0:

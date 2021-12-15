@@ -46,11 +46,12 @@
 	locate 0, 19
 	print "Joystick X  Joystick Y";
 	attr 2, 0
-10	x = joystk(0)
-	y = joystk(1)
-	locate 4, 20
-	print using "##          ##"; x; y;
-	goto 10
+	while 1 then
+		x = joystk(0)
+		y = joystk(1)
+		locate 4, 20
+		print using "##          ##"; x; y;
+	end while
 
 	' Reset the machine
 1000	poke &H71, 0
