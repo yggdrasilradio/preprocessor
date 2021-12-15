@@ -78,9 +78,6 @@ for line in linelist:
 		line = line.replace("WHILE", "IF", 1)
 		line = str(linenum + 1) + line
 		line = minify(line);
-	# END WHILE
-	#if inwhile > 0:
-		#line = re.sub(r'WHILE$', r'IF', line)
 	# DATA
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
