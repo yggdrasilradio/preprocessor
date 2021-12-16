@@ -40,13 +40,13 @@ def minify(text):
 
 def optimize(text):
 
-	r = re.sub(r':?ELSE:?', r'ELSE', text)		# strip trailing colon after ELSE
-	r = re.sub(r':?THEN:?', r'THEN', r)		# strip trailing colon after THEN
+	r = re.sub(r' ?:?ELSE:?', r' ELSE', text)		# strip trailing colon after ELSE
+	r = re.sub(r' ?:?THEN:?', r' THEN', r)		# strip trailing colon after THEN
 	if len(r) > 0 and r[0] == ":":
 		value = r[1:]				# strip leading colon
 	if len(r) > 0 and r[-1] == ":":
 		r = r[:-1]				# strip trailing colon
-	r = re.sub(r'IF1THEN', r'', r)			# optimize "while 1" loop
+	r = re.sub(r'IF1 THEN', r'', r)			# optimize "while 1" loop
 	return r
 
 # read BASIC file
@@ -123,7 +123,12 @@ for line in linelist:
 				lines = str(linenum) + line
 			else:
 				# concatenate line
-				lines = lines + ":" + line
+				if len(lines) > 200:
+					print optimize(lines)
+					linenum = linenum + 1
+					lines = str(linenum) + line
+				else:
+					lines = lines + ":" + line
 
 # finish up
 if len(lines) > 0:
