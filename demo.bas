@@ -6,6 +6,8 @@
 	' Disable cursor
 	include "disable.bas"
 
+	rem this is a useless remark
+
 	' Set up video mode and palette colors
 	rgb
 	width 80
@@ -34,23 +36,29 @@
 	for i = 0 to 7
 		locate 0, i * 2
 		attr i, 0
-		if rnd(0) > .5 then
+		if rnd(0) < .5 then
 			print "Color ";
 		else
 			print "Colour ";
-		end if
-		print a$(i);
+		end if 
+		print a$(i)
 	next i
 
 	' Display joystick values until BREAK is hit
 	locate 0, 19
 	print "Joystick X  Joystick Y";
 	attr 2, 0
+	ox = -1
+	oy = -1
 	while 1 then
 		x = joystk(0)
 		y = joystk(1)
-		locate 4, 20
-		print using "##          ##"; x; y;
+		if ox <> x or oy <> y then
+			locate 4, 20
+			print using "##          ##"; x; y;
+		end if
+		ox = x
+		oy = y
 	end while
 
 	' Reset the machine

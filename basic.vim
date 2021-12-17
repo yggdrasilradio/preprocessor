@@ -102,6 +102,7 @@ syn keyword basicStatement print Print PRINT
 syn keyword basicStatement pset Pset PSET
 syn keyword basicStatement put Put PUT
 syn keyword basicStatement read Read READ
+syn keyword basicStatement rem Rem REM
 syn keyword basicStatement rename Rename RENAME
 syn keyword basicStatement renum Renum RENUM
 syn keyword basicStatement reset Reset RESET

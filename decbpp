@@ -21,14 +21,19 @@ def minify(text):
 		if not i % 2:
 			# not inside quotes
 			s = item.upper().strip()		# upper case, strip leading and trailing whitespace
-			s = re.sub(r'([^A-Z])\s+', r'\1', s)	# eliminate whitespace after constants, variables and operators
-			s = re.sub(r'\s+([^A-Z])', r'\1', s)	# eliminate whitespace before constants, variables and operators
+			s = re.sub(r'([^A-Z])\s+', r'\1', s)	# eliminate whitespace after constants and operators
+			s = re.sub(r'\s+([^A-Z])', r'\1', s)	# eliminate whitespace before constants and operators
 			arr[i] = s
-			if "'" in arr[i] or "REM" in arr[i]:
-				# remove comments
+			if "'" in arr[i]:
+				# remove ' comments
 				j = i + 1
 				del arr[j:]
-				arr[i] = arr[i].split("'")[0]
+				arr[i] = arr[i].split("'")[0].strip()
+			if re.match(r'^REM.+$', arr[i]):
+				# remove REM comments
+				j = i + 1
+				del arr[j:]
+				arr[i] = ''
 	r = '"'.join(arr)
 	m = re.search(r'[A-Z]', r, re.I)			# find keyword
 	if m is not None:
@@ -40,7 +45,7 @@ def minify(text):
 
 def optimize(text):
 
-	r = re.sub(r' ?:?ELSE:?', r' ELSE', text)		# strip trailing colon after ELSE
+	r = re.sub(r' ?:?ELSE:?', r' ELSE', text)	# strip trailing colon after ELSE
 	r = re.sub(r' ?:?THEN:?', r' THEN', r)		# strip trailing colon after THEN
 	if len(r) > 0 and r[0] == ":":
 		value = r[1:]				# strip leading colon
