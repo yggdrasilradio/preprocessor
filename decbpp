@@ -139,5 +139,15 @@ for line in linelist:
 if len(lines) > 0:
 	print optimize(lines)
 if len(data) > 0:
-	linenum = linenum + 1
-	print str(linenum) + 'DATA' + data[1:]
+	data = data[1:]
+	arr = data.split(',')
+	data = ""
+	for i, item in enumerate(arr):
+		data = data + ',' + item
+		if len(data) > 200:
+			linenum = linenum + 1
+			print str(linenum) + 'DATA' + data[1:]
+			data = ""
+	if len(data) > 0:
+		linenum = linenum + 1
+		print str(linenum) + 'DATA' + data[1:]
