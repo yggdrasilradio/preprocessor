@@ -31,6 +31,16 @@ syn keyword basicStatement copy Copy COPY
 syn keyword basicStatement csave Csave CSAVE
 syn keyword basicStatement data Data DATA
 syn keyword basicStatement def Def DEF
+syn keyword basicStatement defusr0 Defusr0 DEFUSR0
+syn keyword basicStatement defusr1 Defusr1 DEFUSR1
+syn keyword basicStatement defusr2 Defusr2 DEFUSR2
+syn keyword basicStatement defusr3 Defusr3 DEFUSR3
+syn keyword basicStatement defusr4 Defusr4 DEFUSR4
+syn keyword basicStatement defusr5 Defusr5 DEFUSR5
+syn keyword basicStatement defusr6 Defusr6 DEFUSR6
+syn keyword basicStatement defusr7 Defusr7 DEFUSR7
+syn keyword basicStatement defusr8 Defusr8 DEFUSR8
+syn keyword basicStatement defusr9 Defusr9 DEFUSR9
 syn keyword basicStatement del Del DEL
 syn keyword basicStatement dim Dim DIM
 syn keyword basicStatement dir Dir DIR
@@ -102,7 +112,8 @@ syn keyword basicStatement print Print PRINT
 syn keyword basicStatement pset Pset PSET
 syn keyword basicStatement put Put PUT
 syn keyword basicStatement read Read READ
-syn keyword basicStatement rem Rem REM
+" Don't declare this a statement so it'll be caught by basicComment below
+"syn keyword basicStatement rem Rem REM
 syn keyword basicStatement rename Rename RENAME
 syn keyword basicStatement renum Renum RENUM
 syn keyword basicStatement reset Reset RESET
@@ -172,7 +183,16 @@ syn keyword basicFunction string String STRING
 syn keyword basicFunction tab Tab TAB
 syn keyword basicFunction tan Tan TAN
 syn keyword basicFunction timer Timer TIMER
-syn keyword basicFunction usr Usr USR
+syn keyword basicFunction usr0 Usr0 USR0
+syn keyword basicFunction usr1 Usr1 USR1
+syn keyword basicFunction usr2 Usr2 USR2
+syn keyword basicFunction usr3 Usr3 USR3
+syn keyword basicFunction usr4 Usr4 USR4
+syn keyword basicFunction usr5 Usr5 USR5
+syn keyword basicFunction usr6 Usr6 USR6
+syn keyword basicFunction usr7 Usr7 USR7
+syn keyword basicFunction usr8 Usr8 USR8
+syn keyword basicFunction usr9 Usr9 USR9
 syn keyword basicFunction val Val VAL
 syn keyword basicFunction varptr Varptr VARPTR
 
@@ -184,6 +204,8 @@ syn match  basicNumber		"\<\d\+\>"
 syn match  basicNumber		"\<\d\+\.\d*\>"
 " Floating point number, starting with a dot
 syn match  basicNumber		"\.\d\+\>"
+" Color Basic hex number
+syn match  basicNumber        "&[hH]\x\+\>"
 
 " String and Character contstants
 syn match   basicSpecial contained "\\\d\d\d\|\\."
@@ -215,7 +237,8 @@ if version >= 508 || !exists("did_basic_syntax_inits")
   HiLink basicLabel		Label
   HiLink basicConditional	Conditional
   HiLink basicRepeat		Repeat
-  HiLink basicLineNumber	Comment
+  "HiLink basicLineNumber	Comment
+  HiLink basicLineNumber	Identifier
   HiLink basicNumber		Number
   HiLink basicError		Error
   HiLink basicStatement		Statement

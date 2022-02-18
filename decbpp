@@ -86,7 +86,7 @@ for line in linelist:
 	# DATA
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
-	# END IF and END WHILE
+	# END IF
 	elif line.endswith("ENDIF"): 
 		line = line[:-6]
 		if len(lines) > 0:
@@ -99,6 +99,7 @@ for line in linelist:
 				# line without line number
 				print optimize(lines + ":" + line)
 		lines = ""
+	# END WHILE
 	elif line.endswith("ENDWHILE"): 
 		line = line[:-9]
 		lines = lines + ":GOTO" + str(inwhile)
