@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 import re
@@ -93,11 +93,11 @@ for line in linelist:
 			if len(line) > 0 and line[0].isdigit():
 				# line with line number
 				linenum = int(re.findall(r'^\D*(\d+)', line)[0])
-				print optimize(lines)
-				print optimize(line)
+				print(optimize(lines))
+				print(optimize(line))
 			else:
 				# line without line number
-				print optimize(lines + ":" + line)
+				print(optimize(lines + ":" + line))
 		lines = ""
 	# END WHILE
 	elif line.endswith("ENDWHILE"): 
@@ -108,18 +108,18 @@ for line in linelist:
 			if len(line) > 0 and line[0].isdigit():
 				# line with line number
 				linenum = int(re.findall(r'^\D*(\d+)', line)[0])
-				print optimize(lines)
-				print optimize(line)
+				print(optimize(lines))
+				print(optimize(line))
 			else:
 				# line without line number
-				print optimize(lines + ":" + line)
+				print(optimize(lines + ":" + line))
 		lines = ""
 	elif len(line) > 0:
 		if line[0].isdigit():
 			# line with line number
 			linenum = int(re.findall(r'^\D*(\d+)', line)[0])
 			if len(lines) > 0:
-				print optimize(lines)
+				print(optimize(lines))
 			lines = line
 		else:
 			# line without line number
@@ -130,7 +130,7 @@ for line in linelist:
 			else:
 				# concatenate line
 				if len(lines) > 200:
-					print optimize(lines)
+					print(optimize(lines))
 					linenum = linenum + 1
 					lines = str(linenum) + line
 				else:
@@ -138,7 +138,7 @@ for line in linelist:
 
 # finish up
 if len(lines) > 0:
-	print optimize(lines)
+	print(optimize(lines))
 if len(data) > 0:
 	data = data[1:]
 	arr = data.split(',')
@@ -147,8 +147,8 @@ if len(data) > 0:
 		data = data + ',' + item
 		if len(data) > 200:
 			linenum = linenum + 1
-			print str(linenum) + 'DATA' + data[1:]
+			print(str(linenum) + 'DATA' + data[1:])
 			data = ""
 	if len(data) > 0:
 		linenum = linenum + 1
-		print str(linenum) + 'DATA' + data[1:]
+		print(str(linenum) + 'DATA' + data[1:])
