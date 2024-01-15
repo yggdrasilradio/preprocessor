@@ -254,31 +254,14 @@ if version >= 508 || !exists("did_basic_syntax_inits")
 
 endif
 
-" CYAN
-"hi Comment term=bold ctermfg=Cyan guifg=#80a0ff gui=bold
 hi Comment term=bold ctermfg=White guifg=#80a0ff gui=bold
-
-" DARKRED
-"hi Constant term=underline cterm=NONE ctermfg=DarkRed ctermbg=NONE gui=NONE guifg=Magenta guibg=NONE
-hi Constant term=underline cterm=NONE ctermfg=Cyan ctermbg=NONE gui=NONE guifg=Magenta guibg=NONE
-
-" DARKCYAN
-hi Identifier term=underline cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
-
-" BROWN
-"hi Statement	term=bold cterm=NONE ctermfg=Brown ctermbg=NONE gui=bold guifg=Brown guibg=NONE
-hi Statement	term=bold cterm=NONE ctermfg=Yellow ctermbg=NONE gui=bold guifg=Brown guibg=NONE
-
-" DARKMAGENTA
+hi Constant term=bold cterm=NONE ctermfg=LightBlue ctermbg=NONE gui=NONE guifg=Magenta guibg=NONE
+hi Identifier term=bold cterm=NONE ctermfg=Cyan ctermbg=NONE gui=NONE guifg=DarkCyan guibg=NONE
+hi Statement term=bold cterm=NONE ctermfg=Yellow ctermbg=NONE gui=bold guifg=Yellow guibg=NONE
 hi Special term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=SlateBlue guibg=NONE
-hi Underlined term=underline cterm=underline ctermfg=DarkMagenta gui=underline guifg=SlateBlue
-hi PreProc term=underline cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=Purple guibg=NONE
-
-" DARKGREEN
+hi Underlined term=bold cterm=underline ctermfg=DarkMagenta gui=underline guifg=SlateBlue
+hi PreProc term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=Purple guibg=NONE
 hi Type term=underline cterm=NONE ctermfg=DarkGreen ctermbg=NONE gui=bold guifg=SeaGreen guibg=NONE
-"hi Type term=underline cterm=NONE ctermfg=White ctermbg=NONE gui=bold guifg=SeaGreen guibg=NONE
-
-" WHITE
 hi Todo term=underline cterm=NONE ctermfg=White ctermbg=NONE gui=bold guifg=SeaGreen guibg=NONE
 
 let b:current_syntax = "basic"
