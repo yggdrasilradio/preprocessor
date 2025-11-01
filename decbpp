@@ -48,7 +48,7 @@ def optimize(text):
 	r = re.sub(r' ?:?ELSE:?', r' ELSE', text)	# strip trailing colon after ELSE
 	r = re.sub(r' ?:?THEN:?', r' THEN', r)		# strip trailing colon after THEN
 	if len(r) > 0 and r[0] == ":":
-		value = r[1:]				# strip leading colon
+		r = r[1:]				# strip leading colon
 	if len(r) > 0 and r[-1] == ":":
 		r = r[:-1]				# strip trailing colon
 	r = re.sub(r'IF1 THEN', r'', r)			# optimize "while 1" loop
@@ -78,11 +78,11 @@ for line in linelist:
 	line = minify(line)
 
 	# WHILE
-	if re.match("^.*\d*.*WHILE.+$", line):
+	if re.match(r"^.*\d*.*WHILE.+$", line):
 		inwhile = linenum + 1
 		line = line.replace("WHILE", "IF", 1)
 		line = str(linenum + 1) + line
-		line = minify(line);
+		line = minify(line)
 	# DATA
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
