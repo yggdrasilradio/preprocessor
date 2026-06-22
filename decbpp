@@ -86,6 +86,18 @@ for line in linelist:
 	# DATA
 	if line.startswith("DATA"):
 		data = data + ',' + minify(line[4:])
+	# IF ... GOTO
+	elif re.match(r"^.*\d*.*IF.*GOTO.+$", line):
+		if len(lines) > 0:
+			if len(line) > 0 and line[0].isdigit():
+				# line with line number
+				linenum = int(re.findall(r'^\D*(\d+)', line)[0])
+				print(optimize(lines))
+				print(optimize(line))
+			else:
+				# line without line number
+				print(optimize(lines + ":" + line))
+		lines = ""
 	# END IF
 	elif line.endswith("ENDIF"): 
 		line = line[:-6]
