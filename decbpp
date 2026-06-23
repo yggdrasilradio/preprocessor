@@ -52,6 +52,7 @@ def optimize(text):
 	if len(r) > 0 and r[-1] == ":":
 		r = r[:-1]				# strip trailing colon
 	r = re.sub(r'IF1 THEN', r'', r)			# optimize "while 1" loop
+	r = re.sub(r'THENGOTO', r'THEN', r)		# fix THENGOTO
 	return r
 
 # read BASIC file
