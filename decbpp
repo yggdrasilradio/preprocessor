@@ -136,6 +136,10 @@ for line in linelist:
 					lines = str(linenum) + line
 				else:
 					lines = lines + ":" + line
+	if re.match(r".*GOTO\s*\d+$", line):
+		if len(lines) > 0:
+			print(optimize(lines))
+			lines = ""
 
 # finish up
 if len(lines) > 0:
